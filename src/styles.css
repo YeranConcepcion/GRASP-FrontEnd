@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url(app/assets/images/bk3.jpg);
+  
+    background-size: cover; /* Ensures the image covers the entire screen */
+    
+
+  }
+  
+  html, app-root {
+    height: 100%;
+  }
