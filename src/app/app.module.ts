@@ -7,6 +7,12 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DisplayMapComponent } from './components/maplibre/map.component';
+import { GasMapComponent } from './components/gas-map/gas-map.component';
+import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
+import { NgStyle } from '@angular/common';
+
+
 
 @NgModule({
   declarations: [
@@ -14,11 +20,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    DisplayMapComponent,
+    GasMapComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxMapLibreGLModule,
+    NgStyle
   ],
   providers: [],
   bootstrap: [AppComponent]
