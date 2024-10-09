@@ -11,6 +11,7 @@ import { DisplayMapComponent } from './components/maplibre/map.component';
 import { GasMapComponent } from './components/gas-map/gas-map.component';
 import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
 import { NgStyle } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 
 
 
@@ -28,9 +29,9 @@ import { NgStyle } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     NgxMapLibreGLModule,
-    NgStyle
+    NgStyle,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
