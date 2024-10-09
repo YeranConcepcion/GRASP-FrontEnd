@@ -1,28 +1,23 @@
 
      <mgl-map
         [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'"
-        [zoom]="[15]"
-        [center]="[-77.0353, 38.8895]"
+        [zoom]="[10]"
+        [center]="[-66.5, 18.33]"
         [preserveDrawingBuffer]="true"
         [movingMethod]="'flyTo'"
+        [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]"
         (mapLoad)="loadMap($event)"
       >
-        <mgl-marker #myMarker [lngLat]="[-77.0353, 38.8895]">
-          <div
-            [ngStyle]="{
-              'background-image':
-                'url(https://maplibre.org/maplibre-gl-js/docs/assets/washington-monument.jpg)',
-              'background-size': 'cover',
-              width: '50px',
-              height: '50px',
-              'border-radius': '50%',
-              cursor: 'pointer'
-            }"
-          
-          ></div>
+      @for (station of gas_stations; track $index){
+        <mgl-marker #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ic_local_gas_station_48px.svg" style="width:50px;height:50px;border-radius:50%;cursor:pointer;" />
+          <p>{{station.properties.name}}</p>  
+          <h5>71.7</h5>  
         </mgl-marker>
-        <mgl-popup [marker]="myMarker">
-          Construction on the Washington Monument began in 1848.
+        <mgl-popup [marker]="marker">
+          <p>{{station.properties.name}}</p>
+          <p>{{station.properties.price}}</p>  
         </mgl-popup>
-
+      }
+        
       </mgl-map>
