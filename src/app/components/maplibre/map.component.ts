@@ -23,4 +23,9 @@ export class DisplayMapComponent {
       this.gas_stations = response.features;
     });
   }
+
+  flyToStation(lng:number, lat:number){
+    if (this.map.loaded() == false) return
+    this.map.flyTo({center: [lng, lat], zoom:17 })
+  }
 }
