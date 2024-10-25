@@ -6,7 +6,7 @@
         [preserveDrawingBuffer]="true"
         [movingMethod]="'flyTo'"
         [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]"
-        (mapLoad)="loadMap($event)"
+        (mapLoad)="setup($event)"
       >
       @for (station of gas_stations; track $index){
         <mgl-marker #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
@@ -19,5 +19,5 @@
           <p>{{station.properties.price}}</p>  
         </mgl-popup>
       }
-        
+
       </mgl-map>
