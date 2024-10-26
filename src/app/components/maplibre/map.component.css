@@ -2,3 +2,45 @@ mgl-map {
     height: 100%;
     width: 100%;
 }
+
+/* Main Popup Style */
+:host ::ng-deep .hi {
+    border-radius: 16px;
+    /* padding: 32px; */
+    box-shadow: 0px 2px 18px rgba(5, 98, 220, 0.382);
+    font-family: 'Roboto', sans-serif; /* Google Material font */
+    font-size: 14px;
+    color: #212121; /* Darker text color for contrast */
+    transform: scale(1);
+    position: relative; /* For arrow positioning */
+    opacity: 0.98;
+    background-color: #ffffff00;
+    width: 10rem;
+  }
+  
+  
+  /* Close Button Styling */
+  :host ::ng-deep .hi .mapboxgl-popup-close-button {
+    font-size: 18px;
+    color: #757575;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  /* Title Text */
+  :host ::ng-deep.hi p:first-of-type {
+    font-weight: 500; /* Medium weight for Material feel */
+    font-size: 16px;
+    color: #1a73e8; /* Google Blue */
+    margin-bottom: 8px;
+  }
+  
+  /* Description Text */
+  :host ::ng-deep .hi p:last-of-type {
+    font-weight: 400;
+    color: #5f6368; /* Subtle dark gray */
+    font-size: 14px;
+  }

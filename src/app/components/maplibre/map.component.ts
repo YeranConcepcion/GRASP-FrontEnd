@@ -49,7 +49,10 @@ export class DisplayMapComponent {
   }
 
   ngOnInit(): void {
-    
+    this.srvc.getGasStations(-66,18, 10).subscribe((response) => {
+      console.log(response)
+      this.gas_stations = response.features;
+    });
   }
 
   public flyToStation(lng: number, lat: number) {

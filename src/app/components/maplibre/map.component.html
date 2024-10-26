@@ -9,12 +9,13 @@
         (mapLoad)="setup($event)"
       >
       @for (station of gas_stations; track $index){
-        <mgl-marker #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ic_local_gas_station_48px.svg" style="width:50px;height:50px;border-radius:50%;cursor:pointer;" />
+        <mgl-marker  #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
+          <img class="station_icon" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ic_local_gas_station_48px.svg" style="width:50px;height:50px;border-radius:50%;cursor:pointer;" />
           <p>{{station.properties.name}}</p>  
           <h5>71.7</h5>  
         </mgl-marker>
-        <mgl-popup [marker]="marker">
+        <mgl-popup [className]="'hi'" [marker]="marker">
+          <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
           <p>{{station.properties.name}}</p>
           <p>{{station.properties.price}}</p>  
         </mgl-popup>
