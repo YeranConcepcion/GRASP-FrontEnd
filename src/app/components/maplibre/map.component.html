@@ -12,7 +12,7 @@
         <mgl-marker  #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
           <img class="station_icon" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ic_local_gas_station_48px.svg" style="width:50px;height:50px;border-radius:50%;cursor:pointer;" />
           <p>{{station.properties.name}}</p>  
-          <h5>71.7</h5>  
+          <h2 [ngStyle]="{'color': station.highlight? 'green':'red'}">{{station.properties.price}}</h2>  
         </mgl-marker>
         <mgl-popup [className]="'hi'" [marker]="marker">
           <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
