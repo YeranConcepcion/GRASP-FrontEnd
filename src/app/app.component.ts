@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'GRASP-FrontEnd';
+  formFields = {
+    signUp: {
+      name: {
+        order: 1
+      },
+      email: {
+        order: 2
+      },
+      password: {
+        order: 5
+      },
+      confirm_password: {
+        order: 6
+      }
+    },
+  };
 }
