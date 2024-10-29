@@ -7,17 +7,11 @@ import { HomeComponent } from './components/home/home.component';
 import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-
-  {
-    path: "home",
-    component: HomeComponent,
-    canActivate:[authGuard]
-  },
  
-  {
-    path: "**",
-    component: HomeComponent
-  },
+  // {
+  //   path: "**",
+  //   component: HomeComponent
+  // },
   
 
 ];
