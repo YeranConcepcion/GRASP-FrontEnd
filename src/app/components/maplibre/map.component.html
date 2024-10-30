@@ -1,0 +1,28 @@
+
+     <mgl-map
+        [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'"
+        [zoom]="[10]"
+        [center]="[-66.5, 18.33]"
+        [preserveDrawingBuffer]="true"
+        [movingMethod]="'flyTo'"
+        [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]"
+        (mapLoad)="setup($event)"
+      >
+      @for (station of gas_stations; track $index){
+        <mgl-marker style="text-align: center;" #marker [lngLat]="[station.geometry.coordinates[0],station.geometry.coordinates[1]]">
+          <div >
+            <img class="station_icon" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Ic_local_gas_station_48px.svg" style="width:50px; height:50px; border-radius:50%; cursor:pointer;" />
+            <div style="display: flex; justify-content: center; gap: 8px;">
+              <h2 [ngStyle]="{'color': station.highlight ? 'green' : 'red', 'display': 'inline'}">{{station.properties.price}}</h2>
+              <h3 style="display: inline">{{station.properties.name}}</h3>
+            </div>
+          </div>
+        </mgl-marker>
+        <mgl-popup [className]="'popup'" [marker]="marker">
+          <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
+          <p>{{station.properties.name}}</p>
+          <p>{{station.properties.price}}</p>  
+        </mgl-popup>
+      }
+
+      </mgl-map>

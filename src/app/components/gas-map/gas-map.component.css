@@ -1,0 +1,47 @@
+/* Container for splitting the screen */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Default layout for larger screens (1/4 vertical split) */
+.left-panel {
+    width: 25%;
+    background-color: #f4f4f4;
+    /* Optional */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    /* Optional */
+}
+
+.map-container {
+    width: 75%;
+    height: 100%;
+}
+
+/* Media query for phones and smaller devices (horizontal split) */
+@media (max-width: 768px) {
+
+    /* Adjust to stack the panels horizontally */
+    .container {
+        flex-direction: column;
+    }
+
+    /* Map takes 2/3 of the height */
+    .map-container {
+        width: 100%;
+        height: 67vh;
+        /* Takes 2/3 of the screen height */
+        order: 1;
+    }
+
+    /* Left panel at the bottom (1/3 of the height) */
+    .left-panel {
+        width: 100%;
+        height: 33vh;
+        /* Takes 1/3 of the screen height */
+        box-shadow: none;
+        /* Remove side shadow on mobile */
+        order: 2;
+    }
+}

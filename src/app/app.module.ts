@@ -10,6 +10,12 @@ import {Amplify} from "aws-amplify"
 import { environment } from '../environments/environment';
 import { AmplifyAuthenticatorModule } from "@aws-amplify/ui-angular";
 
+
+import { DisplayMapComponent } from './components/maplibre/map.component';
+import { GasMapComponent } from './components/gas-map/gas-map.component';
+import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
+import { NgStyle } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -19,19 +25,24 @@ Amplify.configure({
   }
 });
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-
+,
+    DisplayMapComponent,
+    GasMapComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxMapLibreGLModule,
+    NgStyle,,
     AmplifyAuthenticatorModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

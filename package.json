@@ -20,6 +20,8 @@
     "@angular/router": "^18.2.0",
     "@aws-amplify/ui-angular": "^5.0.27",
     "aws-amplify": "^6.6.4",
+    "@maplibre/ngx-maplibre-gl": "^18.1.2",
+    "maplibre-gl": "^4.7.1",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "rxjs": "~7.8.0",
