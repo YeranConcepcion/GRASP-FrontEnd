@@ -2,6 +2,20 @@
   <nav class="navbar " >
     <div class="container-fluid">
         <h1>GRASP</h1>
-   
+
+        <div class="dropdown" *ngIf="authenticator.route === 'authenticated'">
+        
+          <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Yeran Concepcion
+          </button>
+        
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">My Profile</a></li>
+            <li><a class="dropdown-item" href="#">About Us</a></li>
+            <li><a class="dropdown-item" (click)="authenticator.signOut()">Sing Out</a></li>
+          </ul>
+        </div>
+
+        
     </div>
   </nav>
