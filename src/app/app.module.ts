@@ -31,7 +31,6 @@ Amplify.configure({
     AppComponent,
     HomeComponent,
     NavbarComponent,
-,
     DisplayMapComponent,
     GasMapComponent,
   ],
@@ -39,7 +38,7 @@ Amplify.configure({
     BrowserModule,
     AppRoutingModule,
     NgxMapLibreGLModule,
-    NgStyle,,
+    NgStyle,
     AmplifyAuthenticatorModule
   ],
   providers: [provideHttpClient()],
