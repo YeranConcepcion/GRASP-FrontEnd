@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'GRASP-FrontEnd';
   formFields = {
     signUp: {
-      name: {
+      username: {
         order: 1
       },
       email: {
