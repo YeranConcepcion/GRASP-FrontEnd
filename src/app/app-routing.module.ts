@@ -1,4 +1,4 @@
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -6,9 +6,10 @@ import { HomeComponent } from './components/home/home.component';
 
 import { GasMapComponent } from './components/gas-map/gas-map.component';
 import { authGuard } from './guards/auth.guard';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
- 
+
   {
     path: "map",
     component: GasMapComponent
@@ -18,11 +19,16 @@ const routes: Routes = [
   //   component: HomeComponent
   // },
 
-  { 
-    path: 'about-us', 
-    component: AboutUsComponent 
+  {
+    path: 'about-us',
+    component: AboutUsComponent
   },
-  
+
+  {
+    path: 'my-profile',
+    component: MyProfileComponent
+  },
+
 
 ];
 

@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     },
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Subscribe to router events to check the current route
@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
       .subscribe((event: NavigationEnd) => {
         // Hide sidebar and map when on the About Us page
         this.showSidebarAndMap = event.url !== '/about-us';
+        // Hide when in User Profile
+        this.showSidebarAndMap = event.url != '/my-profile';
       });
   }
 }

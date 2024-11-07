@@ -6,17 +6,18 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
-import {Amplify} from "aws-amplify"
+import { Amplify } from "aws-amplify"
 import { environment } from '../environments/environment';
 import { AmplifyAuthenticatorModule } from "@aws-amplify/ui-angular";
 
 
 import { DisplayMapComponent } from './components/maplibre/map.component';
 import { GasMapComponent } from './components/gas-map/gas-map.component';
-import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
+import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
 import { NgStyle } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { AboutUsComponent } from './about-us/about-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -35,6 +36,7 @@ Amplify.configure({
     DisplayMapComponent,
     GasMapComponent,
     AboutUsComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,
