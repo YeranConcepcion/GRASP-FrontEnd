@@ -1,4 +1,11 @@
 <div class="profile-container">
     <h1>My profile</h1>
+        <ng-container *ngIf="!!authenticator.user">
+            <ul>
+                <li>Username: {{ authenticator.user.username }}</li>
+                <li>Placeholder</li>
+                <li>Placeholder</li>
+            </ul>
+        </ng-container>
     <button type="button" class="btn btn-primary gas-button" routerLink="/map"><< Back to Map</button>
 </div>
