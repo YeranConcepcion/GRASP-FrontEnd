@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { GeolocateControl, Map } from 'maplibre-gl';
 import { BackendService } from '../../services/backend.service';
 import { highlightEconomicStations } from './utils';
@@ -11,18 +11,28 @@ import { highlightEconomicStations } from './utils';
 
 export class DisplayMapComponent {
   constructor(private srvc: BackendService) { }
-  gas_stations: Array<any>;
+  protected gas_stations: any;
+  protected imageLoaded = false;
+  protected selectedFeature: any;
   protected min_price: number
+  public map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
+  @Output() emitter = new EventEmitter<Array<any>>();  
 
-  // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
-  // unused for now, but very handy reference to the map object
-  map: Map;
+  ngOnInit(): void {
+    this.srvc.getGasStations(-66, 18, 4).subscribe((response) => {
+      response.features = highlightEconomicStations(response.features);
+      this.gas_stations = response;
+      console.log(this.gas_stations);
+      this.sendGasStationsToParent()
+    });
+  }
+
   protected setup(map: Map) {
     this.map = map;
     this.loadGeolocateControl()
   }
 
-  protected loadGeolocateControl(){
+  private loadGeolocateControl() {
     let geolocate = new GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true
@@ -31,31 +41,24 @@ export class DisplayMapComponent {
     });
     this.map.addControl(geolocate);
 
-    //automatically locate and show gas stations
-    // setTimeout(() => {
-    //   geolocate.trigger()
-      
-    // }, 3000); 
-    
     // Set an event listener that fires
     // when a trackuserlocationend event occurs.
     geolocate.on('trackuserlocationend', (e) => {
-      console.log('A trackuserlocationend event has occurred.')
-      console.log(e.target._userLocationDotMarker._lngLat.lat)
-      console.log(e.target._userLocationDotMarker._lngLat.lng)
+      console.log('A trackuserlocationend event has occurred.');
+      console.log(e.target._userLocationDotMarker._lngLat.lat);
+      console.log(e.target._userLocationDotMarker._lngLat.lng);
       this.srvc.getGasStations(e.target._userLocationDotMarker._lngLat.lng, e.target._userLocationDotMarker._lngLat.lat, 4).subscribe((response) => {
-        this.gas_stations = highlightEconomicStations(response.features)
+        response.features = highlightEconomicStations(response.features);
+        this.gas_stations = response;
         console.log(this.gas_stations);
+        this.sendGasStationsToParent();
       });
     });
-  }
 
-  ngOnInit(): void {
-    this.srvc.getGasStations(-66,18, 10).subscribe((response) => {    
-      this.gas_stations = highlightEconomicStations(response.features)
-      console.log(this.gas_stations);
-      });      
-    
+    //automatically locate and show gas stations
+    // setTimeout(() => {
+    //   geolocate.trigger()
+    // }, 3000); 
   }
 
   public flyToStation(lng: number, lat: number) {
@@ -63,5 +66,16 @@ export class DisplayMapComponent {
     this.map.flyTo({ center: [lng, lat], zoom: 17 })
   }
 
+  public sendGasStationsToParent() {
+    this.emitter.emit(this.gas_stations);
+  }
+
+  protected onLayerClick(e: any): void {
+    console.log("Clicked on feature:", e.features[0]);
+    const feature = e.features?.[0];
+    if (feature) {
+      this.selectedFeature = feature;
+    }
+  }
 
 }
