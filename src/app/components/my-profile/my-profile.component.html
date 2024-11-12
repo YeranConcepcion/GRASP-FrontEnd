@@ -3,8 +3,8 @@
         <ng-container *ngIf="!!authenticator.user">
             <ul>
                 <li>Username: {{ authenticator.user.username }}</li>
-                <li>Placeholder</li>
-                <li>Placeholder</li>
+                <li>Placeholder: {{ authenticator.user.signInDetails }}</li>
+                <li>UserID: {{ authenticator.user.userId }}</li>
             </ul>
         </ng-container>
     <button type="button" class="btn btn-primary gas-button" routerLink="/map"><< Back to Map</button>
