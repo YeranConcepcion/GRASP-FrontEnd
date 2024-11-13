@@ -1,4 +1,22 @@
-.navbar{
+.navbar {
     background-color: #001F3F;
     color: white;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    /* Aligns the logo and text vertically */
+}
+
+.logo-container img {
+    margin-right: 10px;
+    /* Adds space between the logo and text */
+}
+
+.logo-container h1 {
+    font-size: 50px;
+    /* Adjust as needed */
+    margin: 0;
+    /* Removes default margin */
 }
