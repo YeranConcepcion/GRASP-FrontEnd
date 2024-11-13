@@ -1,7 +1,9 @@
 .about-container {
 
-    h1 {
-        font-family: 'roboto', sans-serif;
+    p {
+        text-align: left;
+        text-align: justify;
+        margin-right: 125px;
     }
 
     margin-left: 20px;
