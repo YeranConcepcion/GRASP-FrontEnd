@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
+import { DialogRef } from '@angular/cdk/dialog';  // Use DialogRef from CDK
 
 @Component({
   selector: 'app-my-profile',
@@ -15,7 +16,10 @@ export class MyProfileComponent implements OnInit {
     sub: ''
   };
 
-  constructor(public authenticator: AuthenticatorService) { }
+  constructor(
+    public authenticator: AuthenticatorService,
+    public dialogRef: DialogRef<MyProfileComponent>,  // Use DialogRef from CDK
+  ) { }
 
   ngOnInit(): void {
     this.fetchUserInfo();
@@ -23,18 +27,19 @@ export class MyProfileComponent implements OnInit {
 
   async fetchUserInfo() {
     try {
-      // Fetch the authenticated user's basic info
       const user = await getCurrentUser();
       this.userInfo.username = user.username;
 
-      // Fetch additional user attributes and store them directly
       const attributes = await fetchUserAttributes();
-      console.log('Fetched Attributes:', attributes);
       this.userInfo.email = attributes.email || 'Email unavailable';
       this.userInfo.email_verified = attributes.email_verified;
-
     } catch (error) {
       console.error('Error fetching user info:', error);
     }
+  }
+
+  closeModal(): void {
+    console.log('Closing Modal...');
+    this.dialogRef.close();
   }
 }

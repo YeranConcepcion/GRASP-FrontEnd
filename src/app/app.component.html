@@ -10,11 +10,6 @@
     let-user="user"
     let-signOut="signOut"
   >
-    <!-- Conditional display of sidebar and map -->
-    <ng-container *ngIf="showSidebarAndMap">
-      <home-component></home-component>
-      <app-map></app-map>
-    </ng-container>
+    <!-- Conditional rendering is no longer needed here as routes handle component loading -->
   </ng-template>
-  
 </amplify-authenticator>

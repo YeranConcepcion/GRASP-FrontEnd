@@ -18,6 +18,7 @@ import { NgStyle } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { DialogModule } from '@angular/cdk/dialog';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -43,7 +44,8 @@ Amplify.configure({
     AppRoutingModule,
     NgxMapLibreGLModule,
     NgStyle,
-    AmplifyAuthenticatorModule
+    AmplifyAuthenticatorModule,
+    DialogModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

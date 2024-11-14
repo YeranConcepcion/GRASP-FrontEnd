@@ -37,8 +37,8 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        // Hide sidebar and map when on the About Us page and My Profile
-        this.showSidebarAndMap = event.url !== '/about-us' && event.url !== '/my-profile';
+        // Hide sidebar and map when on the About Us page
+        this.showSidebarAndMap = event.url !== '/about-us';
       });
   }
 }
