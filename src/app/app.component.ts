@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Hub } from '@aws-amplify/core';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,14 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+
+    Hub.listen('auth', async (data) => {
+      const { event } = data.payload;
+      if (event === 'signedIn') {
+        this.router.navigate(['/map']);
+      }
+    });
+
     // Subscribe to router events to check the current route
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
