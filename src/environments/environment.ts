@@ -2,8 +2,8 @@ export const environment = {
     production: false,
     apiUrl: 'http://localhost:3000/api',  // Your development API URL
     cognitoConfig: {
-      userPoolId: 'your-user-pool-id',
-      clientId: 'your-client-id'
+      userPoolId: 'us-west-2_UR2oBa8bZ',
+      clientId: '1hh20kasovioaq9mrsqo5fibui'
     }
   };
   
