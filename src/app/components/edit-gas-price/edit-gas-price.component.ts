@@ -15,6 +15,22 @@ export class EditGasPriceComponent implements OnInit{
     this.gasStations = fetchedStations;
     console.log(this.gasStations)
     });
-    }
+    this.updatePrice()
+  }
+  updatePrice(){
+    var station = new GasStations()
+    station.Station_ID = "228"
+    station.Station_Gas_Price = "99.5"
+    console.log(station)
+    this.dynamoService.updateGasPrice(station).subscribe(({
+      next : (message) =>{
+        console.log(message)
+
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    }))
+  }
 
 }
