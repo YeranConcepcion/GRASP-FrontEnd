@@ -10,7 +10,7 @@ import {Amplify} from "aws-amplify"
 import { environment } from '../environments/environment';
 import { AmplifyAuthenticatorModule } from "@aws-amplify/ui-angular";
 
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisplayMapComponent } from './components/maplibre/map.component';
 import { GasMapComponent } from './components/gas-map/gas-map.component';
 import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
@@ -41,7 +41,8 @@ Amplify.configure({
     AppRoutingModule,
     NgxMapLibreGLModule,
     NgStyle,
-    AmplifyAuthenticatorModule
+    AmplifyAuthenticatorModule,
+    NgbModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

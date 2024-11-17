@@ -13,7 +13,7 @@ export class EditGasPriceComponent implements OnInit{
   ngOnInit(): void {
     this.dynamoService.getGasStations().subscribe((fetchedStations) => {
     this.gasStations = fetchedStations;
-    console.log(this.gasStations)
+    // console.log(this.gasStations)
     });
     this.updatePrice()
   }
@@ -24,7 +24,7 @@ export class EditGasPriceComponent implements OnInit{
     console.log(station)
     this.dynamoService.updateGasPrice(station).subscribe(({
       next : (message) =>{
-        console.log(message)
+       
 
       },
       error:(err)=>{

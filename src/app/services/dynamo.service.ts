@@ -21,7 +21,7 @@ export class DynamoService {
     })
     console.log(station, "in service")
     return this.http.post(this.UPDATEGASPRICE,JSON.stringify(station),{headers}).pipe(
-      tap(_ => console.log("Success"))
+      tap(_ => console.log("Updated Gas Station Price"))
     )
     
   }
