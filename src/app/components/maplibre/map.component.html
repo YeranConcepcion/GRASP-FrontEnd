@@ -13,7 +13,7 @@
     'icon-image': 'gas_icon',
     'icon-size': 0.25,
     'symbol-placement': 'point',
-    'text-field': ['format', ['get', 'price'], { 'font-scale': 1.1 }, ' ', ['get', 'name']],
+    'text-field': ['format', ['get', 'Station_Gas_Price'], { 'font-scale': 1.1 }, ' ', ['get', 'Station_Name']],
     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
     'text-offset': [0, 1.25],
     'text-anchor': 'top'
@@ -26,8 +26,8 @@
   (close)="selectedFeature = null"
 >
 <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
-<p>{{selectedFeature.properties.name}}</p>
-<p>{{selectedFeature.properties.price}}</p>  
+<p>{{selectedFeature.properties.Station_Name}}</p>
+<p>{{selectedFeature.properties.Station_Gas_Price}}</p>  
 </mgl-popup>
 
 </mgl-map>

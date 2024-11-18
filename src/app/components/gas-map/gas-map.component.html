@@ -1,7 +1,8 @@
 <div class="container" style="max-width: 100vw; height: 100vh; padding-left: 0%; padding-right: 0%;">
     <!-- Left Panel -->
     <div class="left-panel" style="overflow: auto;"><div class="dropdown">
-        
+        <h2>Filters</h2>
+        <button (click)="loadAllGasStations()"> Load All Gas Stations </button>
         <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           By Brand
         </button>
@@ -93,10 +94,10 @@
         </ul>
       </div>
       <h2>Nearest Stations</h2>
-      @for (station of receivedList?.features; track $index){
-      <button type="button" class="btn btn-light gas-button" >{{station.properties.name}}</button>
+      @for (station of gas_stations?.features; track $index){
+      <button type="button" class="btn btn-light gas-button" >{{station.properties.Station_Name}}</button>
       }
-      <h2>Filters</h2>
+      
       
 
      
@@ -106,6 +107,6 @@
     </div>
 
     <div class="map-container">
-        <app-map (emitter)="receiveListFromChild($event)"></app-map>
+        <app-map (emitter)="receiveListFromChild($event)" [gas_stations]="gas_stations"></app-map>
     </div>
 </div>
