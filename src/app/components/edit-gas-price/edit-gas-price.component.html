@@ -1,20 +1,63 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Gas Station Prices</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h1>Hello</h1>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form #updateGasPriceForm="ngForm" (ngSubmit)="onSubmit(updateGasPriceForm)">
+          <!-- ID Input -->
+          <div>
+            <label for="id" class="form-label">Gas Station ID</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="ID"
+              aria-label="default input example"
+              id="id"
+              name="id"
+              [(ngModel)]="gasPriceForm.Station_ID"
+              #idField="ngModel"
+              required
+            />
+            <div *ngIf="idField.invalid && idField.touched">
+              ID is required.
+            </div>
+          </div>
+
+          <!-- Price Input -->
+          <div>
+            <label for="price" class="form-label">Price</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="$"
+              aria-label="default input example"
+              id="price"
+              name="price"
+              [(ngModel)]="gasPriceForm.Station_Gas_Price"
+              #priceField="ngModel"
+              required
+              pattern="^[0-9]+(\\.[0-9]{1,2})?$"
+            />
+            <div *ngIf="priceField.invalid && priceField.touched">
+              <div *ngIf="priceField.errors?.['required']">Price is required.</div>
+              <div *ngIf="priceField.errors?.['pattern']">
+                Enter a valid price (e.g., 10.99).
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="updateGasPriceForm.invalid">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

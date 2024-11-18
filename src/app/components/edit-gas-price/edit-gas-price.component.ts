@@ -9,6 +9,7 @@ import { GasStations } from '../../models/gas-stations'
 })
 export class EditGasPriceComponent implements OnInit{
   gasStations : GasStations[] = []
+  gasPriceForm : GasStations = new GasStations();
   constructor ( private dynamoService : DynamoService) {}
   ngOnInit(): void {
     this.dynamoService.getGasStations().subscribe((fetchedStations) => {
@@ -31,6 +32,13 @@ export class EditGasPriceComponent implements OnInit{
         console.log(err)
       }
     }))
+  }
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log('Form Submitted!', form.value);
+    } else {
+      console.log('Form is invalid.');
+    }
   }
 
 }
