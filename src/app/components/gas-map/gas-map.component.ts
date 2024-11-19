@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { highlightEconomicStations } from '../maplibre/utils';
+import { Map } from 'maplibre-gl';
 
 @Component({
   selector: 'app-gas-map',
@@ -9,6 +10,7 @@ import { highlightEconomicStations } from '../maplibre/utils';
 })
 export class GasMapComponent {
   constructor(private srvc: BackendService){}
+  protected map: any;
   protected gas_stations: any;
   protected filtered_gas_stations: any;
   protected filters : any = {
@@ -38,9 +40,13 @@ export class GasMapComponent {
   }
 
   // Method to handle the list emitted from the child
-  receiveListFromChild(list: any) {
-    this.gas_stations = {...list};
-    console.log('gas stations received from child:', this.gas_stations);
+  receiveListFromChild(map: Map) {
+    this.map = map;
+  }
+
+  public flyToStation(lng: number, lat: number) {
+    if (this.map.loaded() == false) return;
+    this.map.flyTo({ center: [lng, lat], zoom: 17 })
   }
 
    // Handle price filter selection

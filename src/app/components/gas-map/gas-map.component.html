@@ -58,6 +58,15 @@
             <input
               class="form-check-input"
               type="checkbox"
+              value="Puma"
+              (change)="onBrandFilterToggled('Puma', $any($event.target)?.checked)"
+            />
+            <label class="form-check-label">Puma</label>  
+          </div>
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
               value="Total"
               (change)="onBrandFilterToggled('Total', $any($event.target)?.checked)"
             />
@@ -103,18 +112,13 @@
       </div>
       
                 <h2>Nearest Stations</h2>
-                @for (station of filtered_gas_stations?.features; track $index){
-                <button type="button" class="btn btn-light gas-button">{{station.properties.Station_Name}}
-                        {{station.properties.Station_Gas_Price}}
-                </button>
+                @if(map!=undefined){
+                  @for (station of filtered_gas_stations?.features; track $index){
+                  <button type="button" class="btn btn-light gas-button" (click)="flyToStation(station.geometry.coordinates[0], station.geometry.coordinates[1])">{{station.properties.Station_Name}}
+                          {{station.properties.Station_Gas_Price}}
+                  </button>
                 }
-
-
-
-
-
-
-
+              }
         </div>
 
         <div class="map-container">

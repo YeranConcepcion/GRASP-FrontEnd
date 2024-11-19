@@ -15,14 +15,15 @@ export class DisplayMapComponent {
   protected imageLoaded = false;
   protected selectedFeature: any;
   protected min_price: number
-  public map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
-  @Output() emitter = new EventEmitter<Array<any>>();  
+  private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
+  @Output() emitter = new EventEmitter<Map>();  
 
 
 
   protected setup(map: Map) {
     this.map = map;
     this.loadGeolocateControl()
+    this.emitMap();
   }
 
   private loadGeolocateControl() {
@@ -43,7 +44,6 @@ export class DisplayMapComponent {
       this.srvc.getGasStations(e.target._userLocationDotMarker._lngLat.lng, e.target._userLocationDotMarker._lngLat.lat, 4).subscribe((response) => {
         response.features = highlightEconomicStations(response.features);
         console.log(this.gas_stations);
-        this.sendGasStationsToParent();
       });
     });
 
@@ -53,21 +53,16 @@ export class DisplayMapComponent {
     // }, 3000); 
   }
 
-  public flyToStation(lng: number, lat: number) {
-    if (this.map.loaded() == false) return
-    this.map.flyTo({ center: [lng, lat], zoom: 17 })
-  }
-
-  public sendGasStationsToParent() {
-    this.emitter.emit(this.gas_stations);
-  }
-
   protected onLayerClick(e: any): void {
     console.log("Clicked on feature:", e.features[0]);
     const feature = e.features?.[0];
     if (feature) {
       this.selectedFeature = feature;
     }
+  }
+
+  public emitMap() {
+    this.emitter.emit(this.map);
   }
 
 }
