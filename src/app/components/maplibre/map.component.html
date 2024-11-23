@@ -1,33 +1,31 @@
 <mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[10]"
   [center]="[-66.5, 18.33]" [preserveDrawingBuffer]="true" [movingMethod]="'flyTo'"
   [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
-  
+
   <mgl-image id="gas_icon" url="assets/images/gas_icon.png" (imageLoaded)="imageLoaded = true" />
-  
-  <!-- GeoJSON source -->
-  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations"/>
 
   @if(imageLoaded == true){
   <!-- Symbol layer for clickable gas stations -->
-  <mgl-layer id="clickable-layer" type="symbol" source="gas_stations_geojson" (layerClick)="onLayerClick($event)" [layout]="{
+  <mgl-layer id="clickable-layer" type="symbol" source="gas_stations_geojson" (layerClick)="onLayerClick($event)"
+    [layout]="{
     'icon-image': 'gas_icon',
     'icon-size': 0.25,
     'symbol-placement': 'point',
-    'text-field': ['format', ['get', 'Station_Gas_Price'], { 'font-scale': 1.1 }, ' ', ['get', 'Station_Name']],
+    'text-field': ['format', ['get', 'priceHighlight'], { 'font-scale': 1.1 }, ' ', ['get', 'Station_Name']],
     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
     'text-offset': [0, 1.25],
     'text-anchor': 'top'
   }"></mgl-layer>
+
+  <!-- GeoJSON source -->
+  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations" />
   }
 
-  <mgl-popup [className]="'popup'"
-  *ngIf="selectedFeature"
-  [feature]="selectedFeature"
-  (close)="selectedFeature = null"
->
-<img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
-<p>{{selectedFeature.properties.Station_Name}}</p>
-<p>{{selectedFeature.properties.Station_Gas_Price}}</p>  
-</mgl-popup>
+  <mgl-popup [className]="'popup'" *ngIf="selectedFeature" [feature]="selectedFeature" (close)="selectedFeature = null">
+    <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg"
+      style="height: 100px; width: 100px; align-self: center;">
+    <p>{{selectedFeature.properties.Station_Name}}</p>
+    <p>{{selectedFeature.properties.Station_Gas_Price}}</p>
+  </mgl-popup>
 
 </mgl-map>

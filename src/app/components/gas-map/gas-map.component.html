@@ -1,127 +1,93 @@
 <div class="container" style="max-width: 100vw; height: 100vh; padding-left: 0%; padding-right: 0%;">
-        <!-- Left Panel -->
-        <div class="left-panel" style="overflow: auto;">
-                <!-- By Price -->
-<div class="dropdown">
-        <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          By Price
-        </button>
-        <ul class="dropdown-menu">
-          <div>
-            <input
-              class="form-check-input"
-              type="radio"
-              name="price"
-              value="Lowest"
-              (change)="onPriceFilterSelected('Lowest')"
-            />
-            <label class="form-check-label">Lowest - Highest</label>
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="radio"
-              name="price"
-              value="Highest"
-              (change)="onPriceFilterSelected('Highest')"
-            />
-            <label class="form-check-label">Highest - Lowest</label>
-          </div>
-        </ul>
-      </div>
-      
-      <!-- By Brand -->
-      <div class="dropdown">
-        <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          By Brand
-        </button>
-        <ul class="dropdown-menu">
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Texaco"
-              (change)="onBrandFilterToggled('Texaco', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Texaco</label>
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Gulf"
-              (change)="onBrandFilterToggled('Gulf', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Gulf</label>
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Puma"
-              (change)="onBrandFilterToggled('Puma', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Puma</label>  
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Total"
-              (change)="onBrandFilterToggled('Total', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Total</label>
-          </div>
-        </ul>
-      </div>
-      
-      <!-- By Gas Type -->
-      <div class="dropdown">
-        <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          By Gas Type
-        </button>
-        <ul class="dropdown-menu">
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Regular"
-              (change)="onGasTypeFilterToggled('Regular', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Regular</label>
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Premium"
-              (change)="onGasTypeFilterToggled('Premium', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Premium</label>
-          </div>
-          <div>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="Diesel"
-              (change)="onGasTypeFilterToggled('Diesel', $any($event.target)?.checked)"
-            />
-            <label class="form-check-label">Diesel</label>
-          </div>
-        </ul>
-      </div>
-      
-                <h2>Nearest Stations</h2>
-                @if(map!=undefined){
-                  @for (station of filtered_gas_stations?.features; track $index){
-                  <button type="button" class="btn btn-light gas-button" (click)="flyToStation(station.geometry.coordinates[0], station.geometry.coordinates[1])">{{station.properties.Station_Name}}
-                          {{station.properties.Station_Gas_Price}}
-                  </button>
-                }
-              }
+  <!-- Left Panel -->
+  <div class="left-panel" style="overflow: auto;">
+    <!-- By Price -->
+    <div class="dropdown">
+      <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        By Price
+      </button>
+      <ul class="dropdown-menu">
+        <div>
+          <input class="form-check-input" type="radio" name="price" value="Lowest"
+            (change)="onPriceFilterSelected('Lowest')" />
+          <label class="form-check-label">Lowest - Highest</label>
         </div>
+        <div>
+          <input class="form-check-input" type="radio" name="price" value="Highest"
+            (change)="onPriceFilterSelected('Highest')" />
+          <label class="form-check-label">Highest - Lowest</label>
+        </div>
+      </ul>
+    </div>
 
-        <div class="map-container">
-                <app-map (emitter)="receiveListFromChild($event)" [gas_stations]="filtered_gas_stations"></app-map>
+    <!-- By Brand -->
+    <div class="dropdown">
+      <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        By Brand
+      </button>
+      <ul class="dropdown-menu">
+        <div>
+          <input class="form-check-input" type="checkbox" value="Texaco"
+            (change)="onBrandFilterToggled('Texaco', $any($event.target)?.checked)" />
+          <label class="form-check-label">Texaco</label>
         </div>
+        <div>
+          <input class="form-check-input" type="checkbox" value="Gulf"
+            (change)="onBrandFilterToggled('Gulf', $any($event.target)?.checked)" />
+          <label class="form-check-label">Gulf</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" value="Puma"
+            (change)="onBrandFilterToggled('Puma', $any($event.target)?.checked)" />
+          <label class="form-check-label">Puma</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="checkbox" value="Total"
+            (change)="onBrandFilterToggled('Total', $any($event.target)?.checked)" />
+          <label class="form-check-label">Total</label>
+        </div>
+      </ul>
+    </div>
+
+    <!-- By Gas Type -->
+    <div class="dropdown">
+      <button type="button" class="btn btn-light gas-button dropdown-toggle" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        By Gas Type
+      </button>
+      <ul class="dropdown-menu">
+        <div>
+          <input class="form-check-input" type="radio" name="gasType" value="Regular" checked="true"
+            (change)="onGasTypeFilterToggled(1)" />
+          <label class="form-check-label">Regular</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="radio" name="gasType" value="Premium"
+            (change)="onGasTypeFilterToggled(2)" />
+          <label class="form-check-label">Premium</label>
+        </div>
+        <div>
+          <input class="form-check-input" type="radio" name="gasType" value="Diesel"
+            (change)="onGasTypeFilterToggled(3)" />
+          <label class="form-check-label">Diesel</label>
+        </div>
+      </ul>
+    </div>
+
+    <h2>Nearest Stations</h2>
+    @if(map!=undefined){
+    @for (station of filtered_gas_stations?.features; track $index){
+    <button type="button" class="btn btn-light gas-button"
+      (click)="flyToStation(station.geometry.coordinates[0], station.geometry.coordinates[1])">{{station.properties.Station_Name}}
+      {{station.properties.priceHighlight}}
+    </button>
+    }
+    }
+  </div>
+
+  <div class="map-container">
+    <app-map (emitter)="receiveListFromChild($event)" [gas_stations]="filtered_gas_stations"></app-map>
+  </div>
 </div>

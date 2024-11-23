@@ -16,7 +16,7 @@ export class DisplayMapComponent {
   protected selectedFeature: any;
   protected min_price: number
   private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
-  @Output() emitter = new EventEmitter<Map>();  
+  @Output() emitter = new EventEmitter<Map>();
 
 
 
@@ -41,10 +41,6 @@ export class DisplayMapComponent {
       console.log('A trackuserlocationend event has occurred.');
       console.log(e.target._userLocationDotMarker._lngLat.lat);
       console.log(e.target._userLocationDotMarker._lngLat.lng);
-      this.srvc.getGasStations(e.target._userLocationDotMarker._lngLat.lng, e.target._userLocationDotMarker._lngLat.lat, 4).subscribe((response) => {
-        response.features = highlightEconomicStations(response.features);
-        console.log(this.gas_stations);
-      });
     });
 
     //automatically locate and show gas stations
