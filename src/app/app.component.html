@@ -1,5 +1,4 @@
 <navbar></navbar>
-<router-outlet></router-outlet>
 
 <amplify-authenticator
   [loginMechanisms]="['username']"
@@ -10,6 +9,8 @@
     let-user="user"
     let-signOut="signOut"
   >
+  <router-outlet></router-outlet>
+
     <!-- Conditional rendering is no longer needed here as routes handle component loading -->
   </ng-template>
 </amplify-authenticator>

@@ -14,10 +14,7 @@ const routes: Routes = [
     path: "map",
     component: GasMapComponent
   },
-  // {
-  //   path: "**",
-  //   component: HomeComponent
-  // },
+ 
 
   {
     path: 'about-us',
@@ -27,6 +24,10 @@ const routes: Routes = [
   {
     path: 'my-profile',
     component: MyProfileComponent
+  },
+   {
+    path: "**",
+    component: HomeComponent
   },
 
 
