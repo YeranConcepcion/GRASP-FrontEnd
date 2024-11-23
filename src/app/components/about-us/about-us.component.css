@@ -1,0 +1,13 @@
+.about-container {
+
+    p {
+        text-align: left;
+        text-align: justify;
+        margin-right: 125px;
+    }
+
+    margin-left: 20px;
+    padding-left: 20px;
+    margin-top: 10px;
+
+}

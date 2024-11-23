@@ -1,0 +1,66 @@
+/* Ensure the body and html fill the entire screen */
+html,
+body,
+app-root {
+    height: 100%;
+    margin: 0;
+    /* Remove any default margin that may affect layout */
+}
+
+/* Modal overlay container: ensure it fills the entire screen */
+.cdk-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1050;
+    /* Ensure it sits above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Backdrop for the modal */
+.cdk-overlay-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    /* Behind the modal */
+}
+
+/* Modal pane - Profile Modal */
+.cdk-overlay-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* Ensure it's above other content */
+    top: 50%;
+    /* Vertically center */
+    left: 50%;
+    /* Horizontally center */
+    transform: translate(-50%, -50%);
+    /* Offset by 50% for true centering */
+    z-index: 1060;
+    /* Above backdrop */
+    pointer-events: auto;
+    /* Allow interaction with modal content */
+    width: auto;
+    height: auto;
+}
+
+/* Modal content - Profile Modal */
+:host {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    /* Your desired width */
+    height: auto;
+    /* Adjusts height automatically */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1070;
+    /* Ensures modal content is above the backdrop */
+}

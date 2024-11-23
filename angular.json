@@ -121,6 +121,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/@aws-amplify/ui/dist/styles.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -130,5 +131,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "97d74f19-443f-457e-93f2-cedf991c4fa3"
   }
 }

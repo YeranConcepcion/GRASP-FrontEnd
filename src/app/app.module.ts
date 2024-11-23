@@ -17,6 +17,9 @@ import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
 import { NgStyle } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { EditGasPriceComponent } from './components/edit-gas-price/edit-gas-price.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { DialogModule } from '@angular/cdk/dialog';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -34,6 +37,8 @@ Amplify.configure({
     NavbarComponent,
     DisplayMapComponent,
     GasMapComponent,
+    AboutUsComponent,
+    MyProfileComponent,
     EditGasPriceComponent,
   ],
   imports: [
@@ -42,8 +47,9 @@ Amplify.configure({
     NgxMapLibreGLModule,
     NgStyle,
     AmplifyAuthenticatorModule,
+    DialogModule,
     NgbModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

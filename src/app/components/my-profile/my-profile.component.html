@@ -1,0 +1,13 @@
+<div class="profile-container">
+    <h1>My profile</h1>
+        <ng-container *ngIf="!!authenticator.user">
+            <ul>
+                <li>Username: {{ authenticator.user.username }}</li>
+                <li>UserID: {{ authenticator.user.userId }}</li>
+                <li>Email: {{ userInfo.email }}</li>
+                <li>Email Verified: {{ userInfo.email_verified }}</li>
+
+            </ul>
+        </ng-container>
+    <button type="button" class="btn btn-primary gas-button" (click)="closeModal()">Close</button>
+</div>
