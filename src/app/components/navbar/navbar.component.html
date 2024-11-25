@@ -16,8 +16,15 @@
       </button>
 
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" (click)="openProfileModal()">My Profile</a></li>
-        <li><a class="dropdown-item" routerLink="/about-us">About Us</a></li>
+        <li> <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#myProfileModal"
+        >
+          Open Modal
+        </button> </li>
+        <li> <a class="dropdown-item" routerLink="/about-us">About Us</a></li>
         <li>
           <a class="dropdown-item" (click)="onSignOut()">Sign Out</a>
         </li>
