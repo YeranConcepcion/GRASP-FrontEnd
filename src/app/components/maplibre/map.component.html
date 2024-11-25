@@ -23,40 +23,45 @@
 
   <mgl-popup [className]="'popup'" *ngIf="selectedFeature" [feature]="selectedFeature" (close)="selectedFeature = null">
     <!-- Popup Content -->
-        <!-- Gas Station Name -->
-        <h5 class="card-title text-center">{{selectedFeature.properties.Station_Name}}</h5>
-        <div class="text-center">
-          <!-- Station Image -->
-          <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
-            alt="Station Image" style="max-height: 100px;">
-        </div>
-        <!-- Prices Table -->
-        <table class="table table-bordered text-center">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">Fuel Type</th>
-              <th scope="col">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Regular</td>
-              <td>{{selectedFeature.properties.Station_Gas_Price}}</td>
-            </tr>
-            <tr>
-              <td>Diesel</td>
-              <td>{{selectedFeature.properties.Station_Diesel_Price}}</td>
-            </tr>
-            <tr>
-              <td>Premium</td>
-              <td>{{selectedFeature.properties.Station_Premium_Price}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Station City -->
-        <p class="card-text text-center mt-3">
+    <!-- Gas Station Name -->
+    <h5 class="card-title text-center">{{selectedFeature.properties.Station_Name}}</h5>
+    <div class="text-center">
+      <!-- Station Image -->
+      <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
+        alt="Station Image" style="max-height: 100px;">
+    </div>
+    <!-- Prices Table -->
+    <table class="table table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Fuel Type</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Regular</td>
+          <td>{{selectedFeature.properties.Station_Gas_Price}}</td>
+        </tr>
+        <tr>
+          <td>Diesel</td>
+          <td>{{selectedFeature.properties.Station_Diesel_Price}}</td>
+        </tr>
+        <tr>
+          <td>Premium</td>
+          <td>{{selectedFeature.properties.Station_Premium_Price}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Station City -->
+    <!-- <p class="card-text text-center mt-3">
           Located in {{selectedFeature.properties.Station_City}}
-        </p>
+        </p> -->
+    <!-- <a class="btn btn-outline-primary" target="_blank" href="https://www.google.com/maps?q={{selectedFeature._geometry.coordinates[1]}},{{selectedFeature._geometry.coordinates[0]}}"> -->
+    <a class="btn btn-outline-primary" target="_blank"
+      href="https://www.google.com/maps/dir/?api=1&destination={{selectedFeature._geometry.coordinates[1]}},{{selectedFeature._geometry.coordinates[0]}}">
+      Located in {{selectedFeature.properties.Station_City}}
+    </a>
   </mgl-popup>
 
 </mgl-map>
