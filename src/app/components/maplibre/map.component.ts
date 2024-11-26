@@ -10,6 +10,7 @@ import { highlightEconomicStations } from './utils';
 })
 
 export class DisplayMapComponent {
+
   constructor(private srvc: BackendService) { }
   @Input() gas_stations: any;
   protected imageLoaded = false;
@@ -52,7 +53,7 @@ export class DisplayMapComponent {
   protected onLayerClick(e: any): void {
     console.log("Clicked on feature:", e.features[0]);
     const feature = e.features?.[0];
-    if (feature) {
+    if (feature!=undefined) {
       this.selectedFeature = feature;
     }
   }
@@ -61,4 +62,9 @@ export class DisplayMapComponent {
     this.emitter.emit(this.map);
   }
 
+  goToGMap() {
+    if(this.selectedFeature._geometry){
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${this.selectedFeature._geometry.coordinates[1]},${this.selectedFeature._geometry.coordinates[0]}`)
+    }
+  }
 }

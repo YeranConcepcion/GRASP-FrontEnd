@@ -29,6 +29,7 @@
       <!-- Station Image -->
       <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
         alt="Station Image" style="max-height: 100px;">
+      <app-star-rating [rating]="3"></app-star-rating>
     </div>
     <!-- Prices Table -->
     <table class="table table-bordered text-center">
@@ -53,10 +54,11 @@
         </tr>
       </tbody>
     </table>
-    <a class="btn btn-outline-primary" target="_blank"
-      href="https://www.google.com/maps/dir/?api=1&destination={{selectedFeature._geometry.coordinates[1]}},{{selectedFeature._geometry.coordinates[0]}}">
+    
+    <button class="btn btn-outline-primary" target="_blank" (click)="goToGMap()">
       Located in {{selectedFeature.properties.Station_City}}
-    </a>
+    </button>
+  
   </mgl-popup>
 
 </mgl-map>
