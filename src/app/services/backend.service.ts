@@ -29,4 +29,19 @@ export class BackendService {
     return this.http.post(`${this.apiUrl}/submit-endpoint`, data);
   }
 
+// GET request
+getGasStations_aws(lng:number, lat:number): Observable<any> {
+    
+  return this.http.get(`https://y2gyols9t9.execute-api.us-west-2.amazonaws.com/NP/getcloseststation`, 
+    {
+      params : {
+        lng: lng,
+        lat: lat,
+}}
+);
+}
+// GET request
+getallGasStations(): Observable<any> {
+  return this.http.get(`https://y2gyols9t9.execute-api.us-west-2.amazonaws.com/NP/getgasstations`);
+}
 }

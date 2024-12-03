@@ -1,33 +1,64 @@
 <mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[10]"
   [center]="[-66.5, 18.33]" [preserveDrawingBuffer]="true" [movingMethod]="'flyTo'"
   [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
-  
+
   <mgl-image id="gas_icon" url="assets/images/gas_icon.png" (imageLoaded)="imageLoaded = true" />
-  
-  <!-- GeoJSON source -->
-  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations"/>
 
   @if(imageLoaded == true){
   <!-- Symbol layer for clickable gas stations -->
-  <mgl-layer id="clickable-layer" type="symbol" source="gas_stations_geojson" (layerClick)="onLayerClick($event)" [layout]="{
+  <mgl-layer id="clickable-layer" type="symbol" source="gas_stations_geojson" (layerClick)="onLayerClick($event)"
+    [layout]="{
     'icon-image': 'gas_icon',
     'icon-size': 0.25,
     'symbol-placement': 'point',
-    'text-field': ['format', ['get', 'price'], { 'font-scale': 1.1 }, ' ', ['get', 'name']],
+    'text-field': ['format', ['get', 'priceHighlight'], { 'font-scale': 1.1 }, ' ', ['get', 'Station_Name']],
     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
     'text-offset': [0, 1.25],
     'text-anchor': 'top'
   }"></mgl-layer>
+
+  <!-- GeoJSON source -->
+  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations" />
   }
 
-  <mgl-popup [className]="'popup'"
-  *ngIf="selectedFeature"
-  [feature]="selectedFeature"
-  (close)="selectedFeature = null"
->
-<img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" style="height: 100px; width: 100px; align-self: center;">
-<p>{{selectedFeature.properties.name}}</p>
-<p>{{selectedFeature.properties.price}}</p>  
-</mgl-popup>
+  <mgl-popup [className]="'popup'" *ngIf="selectedFeature" [feature]="selectedFeature" (close)="selectedFeature = null">
+    <!-- Popup Content -->
+    <!-- Gas Station Name -->
+    <h5 class="card-title text-center">{{selectedFeature.properties.Station_Name}}</h5>
+    <div class="text-center">
+      <!-- Station Image -->
+      <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
+        alt="Station Image" style="max-height: 100px;">
+      <app-star-rating [rating]="3"></app-star-rating>
+    </div>
+    <!-- Prices Table -->
+    <table class="table table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Fuel Type</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Regular</td>
+          <td>{{selectedFeature.properties.Station_Gas_Price}}</td>
+        </tr>
+        <tr>
+          <td>Diesel</td>
+          <td>{{selectedFeature.properties.Station_Diesel_Price}}</td>
+        </tr>
+        <tr>
+          <td>Premium</td>
+          <td>{{selectedFeature.properties.Station_Premium_Price}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <button class="btn btn-outline-primary" target="_blank" (click)="goToGMap()">
+      Located in {{selectedFeature.properties.Station_City}}
+    </button>
+  
+  </mgl-popup>
 
 </mgl-map>
