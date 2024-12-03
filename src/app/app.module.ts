@@ -16,6 +16,7 @@ import { GasMapComponent } from './components/gas-map/gas-map.component';
 import { NgxMapLibreGLModule} from '@maplibre/ngx-maplibre-gl';
 import { NgStyle } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -33,6 +34,7 @@ Amplify.configure({
     NavbarComponent,
     DisplayMapComponent,
     GasMapComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
