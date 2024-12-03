@@ -3,8 +3,8 @@
   [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
 
   <mgl-image id="gas_icon" url="assets/images/gas_icon.png" (imageLoaded)="imageLoaded = true" />
-
-  @if(imageLoaded == true){
+  @if(imageLoaded == true && gas_stations!=undefined){
+  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations" />
   <!-- Symbol layer for clickable gas stations -->
   <mgl-layer id="clickable-layer" type="symbol" source="gas_stations_geojson" (layerClick)="onLayerClick($event)"
     [layout]="{
@@ -16,9 +16,6 @@
     'text-offset': [0, 1.25],
     'text-anchor': 'top'
   }"></mgl-layer>
-
-  <!-- GeoJSON source -->
-  <mgl-geojson-source id="gas_stations_geojson" [data]="gas_stations" />
   }
 
   <mgl-popup [className]="'popup'" *ngIf="selectedFeature" [feature]="selectedFeature" (close)="selectedFeature = null">
@@ -54,11 +51,11 @@
         </tr>
       </tbody>
     </table>
-    
+
     <button class="btn btn-outline-primary" target="_blank" (click)="goToGMap()">
       Located in {{selectedFeature.properties.Station_City}}
     </button>
-  
+
   </mgl-popup>
 
 </mgl-map>

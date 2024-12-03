@@ -1,0 +1,7 @@
+<button class="btn btn-outline-primary" style="margin-bottom: 5px;">
+    <ng-container *ngFor="let star of stars">
+      <span>
+        {{ star === 1 ? '★' : star === 0.5 ? '⯪' : '☆' }}
+      </span>
+    </ng-container>
+  </button>
