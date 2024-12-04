@@ -87,13 +87,13 @@
 
         <form #updateGasPriceForm="ngForm" (ngSubmit)="onSubmit(updateGasPriceForm)">
           <div *ngIf="!updatingPrices">
-                 <!-- ID Input -->
+              
           <div>
-            <label for="id" class="form-label"><b>Gas Station ID: {{this.selectedGasStaion.Station_ID}}</b></label>
+            <label for="id" class="form-label"><h5> {{this.selectedGasStaion.Station_Name}}</h5></label>
        
-           
-          </div>
 
+          </div>
+     
           <!-- Regular Price Input -->
           <div>
             <label for="Regularprice" class="form-label">Regular Price</label>
