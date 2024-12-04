@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { GasMapComponent } from './components/gas-map/gas-map.component';
 import { authGuard } from './guards/auth.guard';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { HowToComponent } from './how-to/how-to.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'my-profile',
     component: MyProfileComponent
+  },
+  {
+    path: 'howto',
+    component: HowToComponent
   },
    {
     path: "**",

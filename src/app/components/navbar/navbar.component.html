@@ -1,4 +1,7 @@
+
+
 <nav class="navbar">
+
   <div class="container-fluid">
     <div class="logo-container">
       <img src="assets/images/grasp_logoBig.png"  alt="Logo" width="70" height="70">
@@ -23,6 +26,9 @@
       </button>
 
       <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" routerLink="/map" >Home</a>
+        </li>
         <li> <a
      
           class="dropdown-item" 
@@ -33,8 +39,13 @@
         </a> </li>
         <li> <a class="dropdown-item" routerLink="/about-us">About Us</a></li>
         <li>
+          <a class="dropdown-item" routerLink="/howto" >How To</a>
+        </li>
+        <li>
           <a class="dropdown-item" (click)="onSignOut()">Sign Out</a>
         </li>
+        
+      
       </ul>
     </div>
 
@@ -54,6 +65,9 @@
       </button>
 
       <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" routerLink="/map" >Home</a>
+        </li>
         <li> <a
      
           class="dropdown-item" 
@@ -63,6 +77,9 @@
           Profile
         </a> </li>
         <li> <a class="dropdown-item" routerLink="/about-us">About Us</a></li>
+        <li>
+          <a class="dropdown-item" routerLink="/howto" >How To</a>
+        </li>
         <li>
           <a class="dropdown-item" (click)="onSignOut()">Sign Out</a>
         </li>

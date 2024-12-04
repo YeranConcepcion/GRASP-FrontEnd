@@ -21,6 +21,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { HowToComponent } from './how-to/how-to.component';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -41,7 +42,8 @@ Amplify.configure({
     AboutUsComponent,
     MyProfileComponent,
     EditGasPriceComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    HowToComponent
   ],
   imports: [
     BrowserModule,
