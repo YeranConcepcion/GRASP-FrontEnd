@@ -27,7 +27,7 @@
       <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
         alt="Station Image" style="max-height: 100px;">
       <app-star-rating [rating]="3"></app-star-rating>
-      <button style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
+      <button *ngIf="isAdmin()" style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
         Edit Price
       </button>
 

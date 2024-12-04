@@ -12,11 +12,11 @@ export class EditGasPriceComponent implements OnInit{
   gasPriceForm : GasStations = new GasStations();
   constructor ( private dynamoService : DynamoService) {}
   ngOnInit(): void {
-    this.dynamoService.getGasStations().subscribe((fetchedStations) => {
-    this.gasStations = fetchedStations;
-    // console.log(this.gasStations)
-    });
-    this.updatePrice()
+    // this.dynamoService.getGasStations().subscribe((fetchedStations) => {
+    // this.gasStations = fetchedStations;
+    // // console.log(this.gasStations)
+    // });
+    // this.updatePrice()
   }
   updatePrice(){
     var station = new GasStations()

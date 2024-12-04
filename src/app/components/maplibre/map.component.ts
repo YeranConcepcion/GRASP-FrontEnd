@@ -1,18 +1,25 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GeolocateControl, Map } from 'maplibre-gl';
 import { BackendService } from '../../services/backend.service';
 import { highlightEconomicStations } from './utils';
 import { DynamoService } from '../../services/dynamo.service'
 import { GasStations } from '../../models/gas-stations'
+import { Users } from '../../models/users';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+
+import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
 
-export class DisplayMapComponent {
+export class DisplayMapComponent implements OnInit{
 
   constructor(private srvc: BackendService,  private dynamoService : DynamoService) { }
+
   @Input() gas_stations: any;
   protected imageLoaded = false;
   protected selectedFeature: any;
@@ -21,11 +28,25 @@ export class DisplayMapComponent {
   updatingPrices = false;
   updatingComplete = false;
   updateMessage = "";
+  admins : Users[]= []
+  userInfo: any = {
+    username: '',
+    email: '',
+    email_verified: '',
+    sub: ''
+  };
   gasPriceForm : GasStations = new GasStations();
   private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
   @Output() emitter = new EventEmitter<Map>();
 
-
+  ngOnInit(): void {
+    this.fetchUserInfo();
+    this.dynamoService.getAdmins().subscribe((data) => {
+      this.admins = data;
+      console.log(this.admins)
+      });
+      
+  }
   protected setup(map: Map) {
     this.map = map;
     this.loadGeolocateControl()
@@ -121,5 +142,29 @@ export class DisplayMapComponent {
     this.gasPriceForm = new GasStations()
     this.selectedGasStaion = new GasStations()
   
+  }
+  isAdmin(){
+    if(this.userInfo.sub){
+      console.log(this.userInfo.sub)
+      for(var i = 0; i < this.admins.length; i++){
+        if(this.userInfo.sub === this.admins[i].User_ID){
+          console.log(this.admins[i])
+          return true
+        }
+      }
+    }
+    return false
+  }
+  async fetchUserInfo() {
+    try {
+      const user = await getCurrentUser();
+      this.userInfo.username = user.username;
+
+      const attributes = await fetchUserAttributes();
+      this.userInfo.email = attributes.email || 'Email unavailable';
+      this.userInfo.email_verified = attributes.email_verified;
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
   }
 }
