@@ -5,7 +5,9 @@
       <h1>GRASP</h1>
     </div>
 
-    <div class="dropdown" *ngIf="authenticator.route === 'authenticated'">
+
+
+    <div class="dropdown d-none d-md-inline" *ngIf="authenticator.route === 'authenticated'">
       <button
         type="button"
         class="btn btn-outline-info dropdown-toggle"
@@ -35,6 +37,38 @@
         </li>
       </ul>
     </div>
+
+    <div class="btn-group dropstart d-md-none" *ngIf="authenticator.route === 'authenticated'">
+      <button
+        type="button"
+        class="btn btn-outline-info dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+       <!-- Show username on larger screens -->
+       <span class="d-none d-md-inline">{{ authenticator.user.username }}</span>
+
+       <!-- Show profile icon on smaller screens -->
+       <i class="bi bi-person-circle d-md-none"></i>
+        
+      </button>
+
+      <ul class="dropdown-menu">
+        <li> <a
+     
+          class="dropdown-item" 
+          data-bs-toggle="modal"
+          data-bs-target="#myProfileModal"
+        >
+          Profile
+        </a> </li>
+        <li> <a class="dropdown-item" routerLink="/about-us">About Us</a></li>
+        <li>
+          <a class="dropdown-item" (click)="onSignOut()">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
 
@@ -50,7 +84,7 @@
       <ng-container *ngIf="!!authenticator.user">
           <ul>
               <li>Username: {{ authenticator.user.username }}</li>
-           
+              <li>UserID: {{ authenticator.user.userId }}</li>
               <li>Email: {{ userInfo.email }}</li>
               <li>Verified User: {{ userInfo.email_verified }}</li>
 
