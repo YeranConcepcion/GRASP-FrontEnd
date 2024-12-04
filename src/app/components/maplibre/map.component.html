@@ -1,6 +1,6 @@
-<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[10]"
+<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[5]"
   [center]="[-66.5, 18.33]" [preserveDrawingBuffer]="true" [movingMethod]="'flyTo'"
-  [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
+  [maxBounds]="[[-60.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
 
   <mgl-image id="gas_icon" url="assets/images/gas_icon.png" (imageLoaded)="imageLoaded = true" />
   @if(imageLoaded == true && gas_stations!=undefined){
