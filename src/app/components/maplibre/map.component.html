@@ -27,6 +27,10 @@
       <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
         alt="Station Image" style="max-height: 100px;">
       <app-star-rating [rating]="3"></app-star-rating>
+      <button style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
+        Edit Price
+      </button>
+
     </div>
     <!-- Prices Table -->
     <table class="table table-bordered text-center">
@@ -59,3 +63,110 @@
   </mgl-popup>
 
 </mgl-map>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Gas Station Prices</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeEditGasPrice(updateGasPriceForm)"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateGasPriceForm="ngForm" (ngSubmit)="onSubmit(updateGasPriceForm)">
+          <!-- ID Input -->
+          <div>
+            <label for="id" class="form-label">Gas Station ID</label>
+            <input
+              class="form-control"
+              type="text"
+              aria-label="default input example"
+              id="id"
+              name="id"
+              [(ngModel)]=" this.selectedGasStaion.Station_ID"
+              #idField="ngModel"
+              readonly
+            />
+           
+          </div>
+
+          <!-- Regular Price Input -->
+          <div>
+            <label for="Regularprice" class="form-label">Regular Price</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="$"
+              aria-label="default input example"
+              id="Regularprice"
+              name="Regularprice"
+              [(ngModel)]="this.selectedGasStaion.Station_Gas_Price"
+              #priceField="ngModel"
+              required
+              pattern="^[0-9]+(\.[0-9]{1,2})?$"
+
+            />
+            <div *ngIf="priceField.invalid && priceField.touched">
+              <div *ngIf="priceField.errors?.['required']">Price is required.</div>
+              <div *ngIf="priceField.errors?.['pattern']">
+                Enter a valid price (e.g., 10.99).
+              </div>
+            </div>
+          </div>
+          <!-- Price Input -->
+          <div>
+          <label for="Premiumprice" class="form-label">Premium Price</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="$"
+            aria-label="default input example"
+            id="Premiumprice"
+            name="Premiumprice"
+            [(ngModel)]="this.selectedGasStaion.Station_Premium_Price"
+            #pricePremiumField="ngModel"
+            required
+            pattern="^[0-9]+(\.[0-9]{1,2})?$"
+
+          />
+          <div *ngIf="pricePremiumField.invalid && pricePremiumField.touched">
+            <div *ngIf="pricePremiumField.errors?.['required']">Price is required.</div>
+            <div *ngIf="pricePremiumField.errors?.['pattern']">
+              Enter a valid price (e.g., 10.99).
+            </div>
+          </div>
+        </div>
+         <!-- Price Input -->
+         <div>
+          <label for="priceDieselField" class="form-label">Diesel Price</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="$"
+            aria-label="default input example"
+            id="priceDieselField"
+            name="priceDieselField"
+            [(ngModel)]="this.selectedGasStaion.Station_Diesel_Price"
+            #priceDieselField="ngModel"
+            required
+            pattern="^[0-9]+(\.[0-9]{1,2})?$"
+
+          />
+          <div *ngIf="priceDieselField.invalid && priceDieselField.touched">
+            <div *ngIf="priceDieselField.errors?.['required']">Price is required.</div>
+            <div *ngIf="priceDieselField.errors?.['pattern']">
+              Enter a valid price (e.g., 10.99).
+            </div>
+          </div>
+        </div>
+        
+          <!-- Submit Button -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="closeEditGasPrice(updateGasPriceForm)">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="updateGasPriceForm.invalid">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

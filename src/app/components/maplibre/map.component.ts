@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GeolocateControl, Map } from 'maplibre-gl';
 import { BackendService } from '../../services/backend.service';
 import { highlightEconomicStations } from './utils';
-
+import { DynamoService } from '../../services/dynamo.service'
+import { GasStations } from '../../models/gas-stations'
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -11,11 +12,13 @@ import { highlightEconomicStations } from './utils';
 
 export class DisplayMapComponent {
 
-  constructor(private srvc: BackendService) { }
+  constructor(private srvc: BackendService,  private dynamoService : DynamoService) { }
   @Input() gas_stations: any;
   protected imageLoaded = false;
   protected selectedFeature: any;
   protected min_price: number
+  selectedGasStaion = new GasStations()
+  gasPriceForm : GasStations = new GasStations();
   private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
   @Output() emitter = new EventEmitter<Map>();
 
@@ -66,5 +69,46 @@ export class DisplayMapComponent {
     if(this.selectedFeature._geometry){
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${this.selectedFeature._geometry.coordinates[1]},${this.selectedFeature._geometry.coordinates[0]}`)
     }
+  }
+  updatePrice(){
+  
+    this.dynamoService.updateGasPrice(this.selectedGasStaion).subscribe(({
+      next : (message) =>{
+        console.log("Price Updated")
+       
+
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+    }))
+  }
+  onSubmit(form: any) {
+    if (form.valid) {
+      this.updatePrice()
+    } else {
+      console.log('Form is invalid.');
+    }
+  }
+  feedDataEditPrice(givenGasStation:any){
+   
+    this.selectedGasStaion.Station_Name = givenGasStation.properties.Station_Name
+    this.selectedGasStaion.Station_ID = givenGasStation.properties.Station_ID
+    this.selectedGasStaion.Station_Diesel_Price = givenGasStation.properties.Station_Diesel_Price
+    this.selectedGasStaion.Station_Gas_Price = givenGasStation.properties.Station_Gas_Price
+    this.selectedGasStaion.Station_Premium_Price = givenGasStation.properties.Station_Premium_Price
+    this.selectedGasStaion.priceHighlight = givenGasStation.properties.priceHighlight
+    this.selectedGasStaion.Station_City = givenGasStation.properties.Station_City
+    console.log(this.selectedGasStaion)
+
+
+
+
+  }
+  closeEditGasPrice(form: any) {
+    form.resetForm();
+    this.gasPriceForm = new GasStations()
+    this.selectedGasStaion = new GasStations()
+  
   }
 }

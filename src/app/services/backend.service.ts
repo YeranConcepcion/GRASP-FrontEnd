@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class BackendService {
 // GET request
 getGasStations_aws(lng:number, lat:number): Observable<any> {
     
-  return this.http.get(`https://y2gyols9t9.execute-api.us-west-2.amazonaws.com/NP/getcloseststation`, 
+  return this.http.get(environment.GETCLOSESTGASSTATION, 
     {
       params : {
         lng: lng,
@@ -42,6 +43,6 @@ getGasStations_aws(lng:number, lat:number): Observable<any> {
 }
 // GET request
 getallGasStations(): Observable<any> {
-  return this.http.get(`https://y2gyols9t9.execute-api.us-west-2.amazonaws.com/NP/getgasstations`);
+  return this.http.get(environment.GETGASSTATIONS);
 }
 }
