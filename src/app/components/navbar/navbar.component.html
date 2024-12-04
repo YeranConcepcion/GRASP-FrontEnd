@@ -12,7 +12,12 @@
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {{ authenticator.user.username }}
+       <!-- Show username on larger screens -->
+       <span class="d-none d-md-inline">{{ authenticator.user.username }}</span>
+
+       <!-- Show profile icon on smaller screens -->
+       <i class="bi bi-person-circle d-md-none"></i>
+        
       </button>
 
       <ul class="dropdown-menu">

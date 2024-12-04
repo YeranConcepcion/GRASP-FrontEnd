@@ -8,9 +8,16 @@
     width: 100%;
     margin-top: 5%;
     margin-bottom: 5%;
-    height: 10%;
+    /* height: 10%; */
+    font-size: 100%;
 }
-
+.gas-button-sm-screen{
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    /* height: 10%; */
+    font-size: 100%;
+}
 /* Default layout for larger screens (1/4 vertical split) */
 .left-panel {
     width: 25%;
