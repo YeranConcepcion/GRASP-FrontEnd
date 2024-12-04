@@ -1,6 +1,6 @@
-<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[5]"
+<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[10]"
   [center]="[-66.5, 18.33]" [preserveDrawingBuffer]="true" [movingMethod]="'flyTo'"
-  [maxBounds]="[[-60.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
+  [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
 
   <mgl-image id="gas_icon" url="assets/images/gas_icon.png" (imageLoaded)="imageLoaded = true" />
   @if(imageLoaded == true && gas_stations!=undefined){
@@ -27,7 +27,7 @@
       <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
         alt="Station Image" style="max-height: 100px;">
       <app-star-rating [rating]="3"></app-star-rating>
-      <button *ngIf="isAdmin()" style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
+      <button *ngIf="isAdmin" style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
         Edit Price
       </button>
 

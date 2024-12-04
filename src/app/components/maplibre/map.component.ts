@@ -18,7 +18,7 @@ import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
 
 export class DisplayMapComponent implements OnInit{
 
-  constructor(private srvc: BackendService,  private dynamoService : DynamoService) { }
+  constructor(private srvc: BackendService,  private dynamoService : DynamoService, public authenticator: AuthenticatorService,) { }
 
   @Input() gas_stations: any;
   protected imageLoaded = false;
@@ -29,21 +29,28 @@ export class DisplayMapComponent implements OnInit{
   updatingComplete = false;
   updateMessage = "";
   admins : Users[]= []
-  userInfo: any = {
-    username: '',
-    email: '',
-    email_verified: '',
-    sub: ''
-  };
+  isAdmin = false
   gasPriceForm : GasStations = new GasStations();
   private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
   @Output() emitter = new EventEmitter<Map>();
 
-  ngOnInit(): void {
-    this.fetchUserInfo();
+  ngOnInit(){
+
     this.dynamoService.getAdmins().subscribe((data) => {
       this.admins = data;
-      console.log(this.admins)
+      const userId = this.authenticator.user.userId
+      if(userId){
+        for(var i = 0; i < this.admins.length; i++){
+          console.log(this.admins[i])
+          if(userId === this.admins[i].User_ID){
+           
+            this.isAdmin = true
+          }
+        }
+      }
+     
+      
+     
       });
       
   }
@@ -143,28 +150,6 @@ export class DisplayMapComponent implements OnInit{
     this.selectedGasStaion = new GasStations()
   
   }
-  isAdmin(){
-    if(this.userInfo.sub){
-      console.log(this.userInfo.sub)
-      for(var i = 0; i < this.admins.length; i++){
-        if(this.userInfo.sub === this.admins[i].User_ID){
-          console.log(this.admins[i])
-          return true
-        }
-      }
-    }
-    return false
-  }
-  async fetchUserInfo() {
-    try {
-      const user = await getCurrentUser();
-      this.userInfo.username = user.username;
 
-      const attributes = await fetchUserAttributes();
-      this.userInfo.email = attributes.email || 'Email unavailable';
-      this.userInfo.email_verified = attributes.email_verified;
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-    }
-  }
+
 }

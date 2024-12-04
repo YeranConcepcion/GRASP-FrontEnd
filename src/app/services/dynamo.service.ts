@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { GasStations } from "../models/gas-stations"
 import { environment } from '../../environments/environment';
 import { Users } from '../models/users';
@@ -18,9 +18,16 @@ export class DynamoService {
     return this.http.get<GasStations[]>(this.GETGASSTATIONS);
     }
 
-  getAdmins(): Observable<Users[]> {
-    return this.http.get<Users[]>(this.GETADMINS);
+    getAdmins(): Observable<Users[]> {
+      return this.http.get<Users[]>(this.GETADMINS).pipe(
+        map((response: any) => {
+          // Parse the string if it's still in JSON format
+          return JSON.parse(response); 
+    
+        })
+      );
     }
+    
   updateGasPrice(station:GasStations){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
