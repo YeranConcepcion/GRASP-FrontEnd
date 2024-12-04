@@ -18,10 +18,12 @@ export class DisplayMapComponent {
   protected selectedFeature: any;
   protected min_price: number
   selectedGasStaion = new GasStations()
+  updatingPrices = false;
+  updatingComplete = false;
+  updateMessage = "";
   gasPriceForm : GasStations = new GasStations();
   private map: Map; // MapLibre GL Map object (MapLibre is ran outside angular zone, keep that in mind when binding events from this object)
   @Output() emitter = new EventEmitter<Map>();
-
 
 
   protected setup(map: Map) {
@@ -71,15 +73,23 @@ export class DisplayMapComponent {
     }
   }
   updatePrice(){
-  
+    this.updatingPrices = true
+    this.updatingComplete = false
     this.dynamoService.updateGasPrice(this.selectedGasStaion).subscribe(({
       next : (message) =>{
         console.log("Price Updated")
+       
+        this.updatingPrices = false
+        this.updateMessage = "Succesfully updated gas prices."
+        this.updatingComplete = true
        
 
       },
       error:(err)=>{
         console.log(err)
+    
+        this.updatingPrices = false
+        window.confirm("Failed to update gas prices.")
       }
     }))
   }
@@ -91,7 +101,7 @@ export class DisplayMapComponent {
     }
   }
   feedDataEditPrice(givenGasStation:any){
-   
+    this.updatingComplete = false
     this.selectedGasStaion.Station_Name = givenGasStation.properties.Station_Name
     this.selectedGasStaion.Station_ID = givenGasStation.properties.Station_ID
     this.selectedGasStaion.Station_Diesel_Price = givenGasStation.properties.Station_Diesel_Price
@@ -106,6 +116,7 @@ export class DisplayMapComponent {
 
   }
   closeEditGasPrice(form: any) {
+    this.updatingComplete = false
     form.resetForm();
     this.gasPriceForm = new GasStations()
     this.selectedGasStaion = new GasStations()

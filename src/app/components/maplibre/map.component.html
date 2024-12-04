@@ -72,21 +72,25 @@
         <h5 class="modal-title" id="exampleModalLabel">Update Gas Station Prices</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeEditGasPrice(updateGasPriceForm)"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="updatingPrices">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" >
+        <div *ngIf="updatingComplete" class="alert alert-success alert-dismissible fade show" role="alert">
+          {{updateMessage}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
         <form #updateGasPriceForm="ngForm" (ngSubmit)="onSubmit(updateGasPriceForm)">
-          <!-- ID Input -->
+          <div *ngIf="!updatingPrices">
+                 <!-- ID Input -->
           <div>
-            <label for="id" class="form-label">Gas Station ID</label>
-            <input
-              class="form-control"
-              type="text"
-              aria-label="default input example"
-              id="id"
-              name="id"
-              [(ngModel)]=" this.selectedGasStaion.Station_ID"
-              #idField="ngModel"
-              readonly
-            />
+            <label for="id" class="form-label"><b>Gas Station ID: {{this.selectedGasStaion.Station_ID}}</b></label>
+       
            
           </div>
 
@@ -159,6 +163,8 @@
             </div>
           </div>
         </div>
+          </div>
+     
         
           <!-- Submit Button -->
           <div class="modal-footer">
