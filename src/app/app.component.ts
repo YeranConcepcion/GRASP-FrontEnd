@@ -9,6 +9,11 @@ import { Hub } from '@aws-amplify/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  redirectToHowTo() {
+    this.router.navigate(['/how-to']);  // Ensure '/how-to' is a valid route
+  }
+
   title = 'GRASP-FrontEnd';
 
   // Control visibility of sidebar and map

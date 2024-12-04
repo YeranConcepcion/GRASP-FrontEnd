@@ -1,0 +1,14 @@
+.how-to-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.how-to-button button {
+    background: none;
+    border: none;
+    color: #fff;
+    /* Adjust color to fit your theme */
+    font-size: 24px;
+    cursor: pointer;
+}

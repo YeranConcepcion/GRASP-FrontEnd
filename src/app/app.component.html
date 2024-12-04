@@ -1,5 +1,11 @@
 <navbar></navbar>
 
+<div class="how-to-button">
+  <button (click)="redirectToHowTo()" aria-label="How To">
+    <i class="bi bi-question-circle"></i> <!-- Bootstrap Icon -->
+  </button>
+</div>
+
 <amplify-authenticator
   [loginMechanisms]="['username']"
   [formFields]="formFields"
