@@ -15,7 +15,7 @@ const routes: Routes = [
     path: "map",
     component: GasMapComponent
   },
- 
+
 
   {
     path: 'about-us',
@@ -27,10 +27,10 @@ const routes: Routes = [
     component: MyProfileComponent
   },
   {
-    path: 'howto',
+    path: 'how-to',
     component: HowToComponent
   },
-   {
+  {
     path: "**",
     component: HomeComponent
   },

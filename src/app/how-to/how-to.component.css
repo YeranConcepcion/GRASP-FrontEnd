@@ -1,0 +1,10 @@
+.container img {
+    max-width: 100%;
+    /* Ensures the image does not exceed the container width */
+    height: auto;
+    /* Maintains the aspect ratio */
+    display: block;
+    /* Makes sure images don’t inline with text */
+    margin: 20px auto;
+    /* Centers the image with some vertical spacing */
+}
