@@ -24,6 +24,8 @@ export class DisplayMapComponent implements OnInit{
   protected imageLoaded = false;
   protected selectedFeature: any;
   protected min_price: number
+  stars: number[] = [];
+  userRating: number = 5;
   selectedGasStaion = new GasStations()
   updatingPrices = false;
   updatingComplete = false;
@@ -88,7 +90,20 @@ export class DisplayMapComponent implements OnInit{
     const feature = e.features?.[0];
     if (feature!=undefined) {
       this.selectedFeature = feature;
+      const rating =this.selectedFeature.properties.UserRatings != 0? this.selectedFeature.properties.UserRatings / this.selectedFeature.properties.RatingCount : 5;
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      console.log(rating, this.stars, fullStars, hasHalfStar, emptyStars);
+      this.stars = [
+        ...Array(fullStars).fill(1), // Full stars
+        ...(hasHalfStar ? [0.5] : []), // Half star
+        ...Array(emptyStars).fill(0) // Empty stars
+      ];
+      
+      
     }
+
   }
 
   public emitMap() {
@@ -151,5 +166,16 @@ export class DisplayMapComponent implements OnInit{
   
   }
 
-
+  submitRating(Station_ID: string, rating:number) {
+    // Call the backend service to update the rating
+    this.srvc.updateRatings(Station_ID, rating ).subscribe(
+      (response) => {
+        console.log('Rating updated successfully:', response);
+      },
+      (error) => {
+        console.error('Error updating rating:', error);
+        alert("error submiting rating");
+      }
+    );
+  }
 }

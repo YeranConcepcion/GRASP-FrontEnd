@@ -26,11 +26,22 @@
       <!-- Station Image -->
       <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
         alt="Station Image" style="max-height: 100px;">
-      <app-star-rating [rating]="3"></app-star-rating>
+        
+        <button
+        class="btn btn-outline-primary"
+        style="margin-bottom: 5px;"
+        data-bs-toggle="modal"
+        data-bs-target="#ratingModal">
+        <ng-container *ngFor="let star of stars">
+          <span>
+            {{ star === 1 ? '★' : star === 0.5 ? '⯪' : '☆' }}
+          </span>
+        </ng-container>
+      </button>
+
       <button *ngIf="isAdmin" style="margin-bottom: 5%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="feedDataEditPrice(selectedFeature)">
         Edit Price
       </button>
-
     </div>
     <!-- Prices Table -->
     <table class="table table-bordered text-center">
@@ -170,6 +181,56 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="closeEditGasPrice(updateGasPriceForm)">Close</button>
             <button type="submit" class="btn btn-primary" [disabled]="updateGasPriceForm.invalid">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="ratingModal"
+  tabindex="-1"
+  aria-labelledby="ratingModalLabel"
+  aria-hidden="true"
+  role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ratingModalLabel">Rate This Station</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitRating(selectedFeature.properties.Station_ID, userRating)" #ratingForm="ngForm">
+          <div class="mb-3">
+            <label for="userRating" class="form-label">Your Rating (1-5)</label>
+            <input
+              type="number"
+              id="userRating"
+              name="userRating"
+              class="form-control"
+              min="1"
+              max="5"
+              [(ngModel)]="userRating"
+              required />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="!ratingForm.form.valid" data-bs-dismiss="modal">
+              Submit Rating
+            </button>
           </div>
         </form>
       </div>

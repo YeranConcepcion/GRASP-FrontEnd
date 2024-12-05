@@ -7,7 +7,8 @@ export const environment = {
   },
   GETGASSTATIONS : "https://tlvsiwvpgb.execute-api.us-west-2.amazonaws.com/NP/getgasstations",
   UPDATEGASPRICE: "https://tlvsiwvpgb.execute-api.us-west-2.amazonaws.com/NP/updategasprice",
-  GETCLOSESTGASSTATION: "https://tlvsiwvpgb.execute-api.us-west-2.amazonaws.com/NP/getcloseststation",
+  GETCLOSESTGASSTATION: "https://7x2f8ah9ef.execute-api.us-west-2.amazonaws.com/NP/getcloseststation",
+  UPDATERATINGS: "https://7x2f8ah9ef.execute-api.us-west-2.amazonaws.com/NP/stations/rating",
   GETADMINS: "https://tlvsiwvpgb.execute-api.us-west-2.amazonaws.com/NP/getadmins"
 
 };
