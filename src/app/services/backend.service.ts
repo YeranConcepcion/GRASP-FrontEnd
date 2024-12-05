@@ -45,4 +45,12 @@ getGasStations_aws(lng:number, lat:number): Observable<any> {
 getallGasStations(): Observable<any> {
   return this.http.get(environment.GETGASSTATIONS);
 }
+
+updateRatings(stationId: string, rating: number): Observable<any> {
+  const data = {
+    Station_ID: stationId,
+    rating: rating
+  };
+  return this.http.post(environment.UPDATERATINGS, data);
+}
 }

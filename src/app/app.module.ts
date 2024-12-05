@@ -20,7 +20,6 @@ import { EditGasPriceComponent } from './components/edit-gas-price/edit-gas-pric
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { DialogModule } from '@angular/cdk/dialog';
-import { StarRatingComponent } from './components/star-rating/star-rating.component';
 Amplify.configure({
   Auth: {
     Cognito: {
@@ -41,7 +40,6 @@ Amplify.configure({
     AboutUsComponent,
     MyProfileComponent,
     EditGasPriceComponent,
-    StarRatingComponent
   ],
   imports: [
     BrowserModule,
