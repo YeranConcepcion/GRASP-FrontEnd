@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
-import { highlightEconomicStations } from '../maplibre/utils';
 import { Map } from 'maplibre-gl';
-
+import {circle} from '@turf/circle'
 @Component({
   selector: 'app-gas-map',
   templateUrl: './gas-map.component.html',
@@ -23,7 +22,6 @@ export class GasMapComponent {
   ngOnInit(): void {
     this.srvc.getGasStations_aws(-66, 18).subscribe((response) => {
       const data = response;
-      data.features = highlightEconomicStations(data.features);
       this.gas_stations = data;
       this.applyFilters();
     });
@@ -32,7 +30,6 @@ export class GasMapComponent {
   loadAllGasStations() {
     this.srvc.getallGasStations().subscribe((response) => {
       const data = response;
-      data.features = highlightEconomicStations(data.features);
       this.gas_stations = data;
       this.applyFilters();
     });
@@ -49,9 +46,9 @@ export class GasMapComponent {
       const [lng, lat] = e.lngLat.toArray();
       this.srvc.getGasStations_aws(lng, lat).subscribe((response) => {
         const data = response;
-        data.features = highlightEconomicStations(data.features);
         this.gas_stations = data;
         this.applyFilters();
+        this.add_circle(this.map, lng, lat);
       });
     });
   }
@@ -127,6 +124,32 @@ export class GasMapComponent {
     tmp.features = data;
     this.filtered_gas_stations = tmp;
     console.log(this.gas_stations, this.filtered_gas_stations);
+  }
+
+  add_circle(map: Map, lng:number, lat:number, rad:number = 5){
+    const center = [lng, lat]
+    const options: any = {
+      steps: 64,
+      units: 'miles'
+    };
+    const turf_circle = circle(center, rad, options);
+    // Add a fill layer with some transparency.
+    const circleSource : any = map.getSource('circle-location')
+    if (circleSource) circleSource.setData(turf_circle)
+    else {
+      map.addLayer({
+        id: "circle-location",
+        type: "fill",
+        source: {
+          type: "geojson",
+          data: turf_circle
+        },
+        paint: {
+          "fill-color": "#8CCFFF",
+          "fill-opacity": 0.2,
+        }
+      });
+    }
   }
 
 }
