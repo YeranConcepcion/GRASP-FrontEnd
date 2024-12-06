@@ -18,15 +18,6 @@ export class GasMapComponent {
     gasType: 1
   };
 
-
-  ngOnInit(): void {
-    this.srvc.getGasStations_aws(-66, 18).subscribe((response) => {
-      const data = response;
-      this.gas_stations = data;
-      this.applyFilters();
-    });
-  }
-
   loadAllGasStations() {
     this.srvc.getallGasStations().subscribe((response) => {
       const data = response;
