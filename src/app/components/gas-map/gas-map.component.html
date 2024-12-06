@@ -208,29 +208,26 @@
 
 
 
-
 <!-- Modal -->
 <div class="modal fade" id="nearestGasModal" tabindex="-1" aria-labelledby="nearestGasModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Nearest Stations</h1>
+        <h1 class="modal-title fs-5" id="nearestGasModalLabel">Nearest Stations</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-       
-    @if(map!=undefined){
-    @for (station of filtered_gas_stations?.features; track $index){
-    <button  type="button" class="btn btn-light gas-button" data-bs-dismiss="modal"
-      (click)="flyToStation(station.geometry.coordinates[0], station.geometry.coordinates[1])">{{station.properties.Station_Name}}
-      {{station.properties.priceHighlight}}
-    </button>
-    }
-    }
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        @if(map!=undefined){
+        @for (station of filtered_gas_stations?.features; track $index){
+        <button type="button" class="btn btn-light gas-button" data-bs-dismiss="modal"
+          (click)="flyToStation(station.geometry.coordinates[0], station.geometry.coordinates[1])">
+          {{station.properties.Station_Name}} {{station.properties.priceHighlight}}
+        </button>
+        }
+        }
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      
       </div>
     </div>
   </div>
