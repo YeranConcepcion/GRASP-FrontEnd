@@ -1,4 +1,4 @@
-<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[10]"
+<mgl-map [style]="'https://api.maptiler.com/maps/streets/style.json?key=n6S4rviWxFfTzUz0eHiO'" [zoom]="[7]"
   [center]="[-66.5, 18.33]" [preserveDrawingBuffer]="true" [movingMethod]="'flyTo'"
   [maxBounds]="[[-70.3503, 16.8637], [-63.27647, 19.49178]]" (mapLoad)="setup($event)">
 
@@ -22,11 +22,7 @@
     <!-- Popup Content -->
     <!-- Gas Station Name -->
     <h5 class="card-title text-center">{{selectedFeature.properties.Station_Name}}</h5>
-    <div class="text-center">
-      <!-- Station Image -->
-      <img src="https://mayaguezmall.com/wp-content/uploads/2021/11/pumagas-300x300-1.jpg" class="img-fluid mb-3"
-        alt="Station Image" style="max-height: 100px;">
-        
+    <div class="text-center">  
         <button
         class="btn btn-outline-primary"
         style="margin-bottom: 5px;"
